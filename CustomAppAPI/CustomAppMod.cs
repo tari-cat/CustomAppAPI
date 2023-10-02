@@ -73,7 +73,7 @@ namespace CustomAppAPI
             {
                 GameObject customApp = new GameObject(GetAppKey(app));
                 customApp.layer = Layers.Phone;
-                CustomApp component = (CustomApp)customApp.AddComponent(app);
+                CustomApp customAppComponent = (CustomApp)customApp.AddComponent(app);
 
                 customApp.transform.SetParent(apps, false);
                 customApp.transform.localScale = Vector3.one;
@@ -87,8 +87,26 @@ namespace CustomAppAPI
                 content.transform.localScale = Vector3.one;
                 content.SetActive(true);
 
-                CustomAppCache.AddApp(component);
+                Notification email = GetEmailNotification(phone);
+
+                GameObject newEmail = Instantiate(email.gameObject, customApp.transform);
+                Notification notification = newEmail.GetComponent<Notification>();
+
+                customAppComponent.SetNotification(notification);
+
+                CustomAppCache.AddApp(customAppComponent);
             }
+        }
+
+        public static Notification GetEmailNotification(Phone phone)
+        {
+            AppEmail app = phone.GetAppInstance<AppEmail>();
+            if (app == null)
+                return null;
+            Notification notif = app.GetComponent<Notification>();
+            if (notif == null)
+                return null;
+            return notif;
         }
 
         // Utility

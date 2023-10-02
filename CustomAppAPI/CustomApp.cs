@@ -46,5 +46,11 @@ namespace CustomAppAPI
             CustomAppMod.Log.LogWarning($"Could not load image data of {fileName}{ext}.");
             return null;
         }
+
+        public void SetNotification(Notification notification)
+        {
+            m_Notification = notification;
+            m_Notification.InitNotification(this);
+        }
     }
 }
