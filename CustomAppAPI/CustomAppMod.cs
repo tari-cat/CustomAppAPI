@@ -98,7 +98,7 @@ namespace CustomAppAPI
             }
         }
 
-        public static Notification GetEmailNotification(Phone phone)
+        private static Notification GetEmailNotification(Phone phone)
         {
             AppEmail app = phone.GetAppInstance<AppEmail>();
             if (app == null)
