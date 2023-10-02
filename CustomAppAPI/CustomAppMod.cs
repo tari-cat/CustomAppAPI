@@ -79,6 +79,14 @@ namespace CustomAppAPI
                 customApp.transform.localScale = Vector3.one;
                 customApp.SetActive(true);
 
+                GameObject content = new GameObject("Content");
+                content.layer = Layers.Phone;
+                RectTransform contentRect = content.AddComponent<RectTransform>();
+                contentRect.sizeDelta = new Vector2(1070, 1775); // the FUCK
+                content.transform.SetParent(customApp.transform, false);
+                content.transform.localScale = Vector3.one;
+                content.SetActive(true);
+
                 CustomAppCache.AddApp(component);
             }
         }
